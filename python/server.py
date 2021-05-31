@@ -8,13 +8,33 @@ app = Flask(__name__)
 def runSil():
     if (not request.json["code"]):
         return jsonify({ "status": False, "stderr": "Invalid request" })
-    sil = subprocess.run(["/silang/silang", "-"], input=request.json["code"],
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    try:
+        sil = subprocess.run(
+            ["/silang/silang", "-"],
+            input=request.json["code"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=3,
+            check=True,
+        )
+        pt = subprocess.run(
+            ["/silang/silang", "-", "--parseTree"],
+            input=request.json["code"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+    except subprocess.TimeoutExpired:
+        return jsonify({ "status": False, "message": "Timeout error" }), 400
+    except subprocess.CalledProcessError:
+        return jsonify({ "status": False, "message": "Runtime error" }), 500
+    except Exception:
+        return jsonify({ "status": False, "message": "Unknown error" }), 500
+
     stdout = sil.stdout
     stderr = sil.stderr
     if len(stderr) == 0:
-        pt = subprocess.run(["/silang/silang", "-", "--parseTree"], input=request.json["code"],
-                            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         return jsonify({ "status": True, "stdout": stdout, "parseTree": pt.stdout })
     else:
         return jsonify({ "status": False, "stderr": stderr })
