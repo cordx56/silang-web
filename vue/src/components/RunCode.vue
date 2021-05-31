@@ -6,27 +6,15 @@
     </form>
     <div v-if="stderr" class="block">
       <h3 class="title">Error</h3>
-      <pre id="error">
-        <code>
-          {{ stderr }}
-        </code>
-      </pre>
+      <pre id="error"><code>{{ stderr }}</code></pre>
     </div>
     <div v-if="stdout" class="block">
       <h3 class="title">Output</h3>
-      <pre id="output">
-        <code>
-          {{ stdout }}
-        </code>
-      </pre>
+      <pre id="output"><code>{{ stdout }}</code></pre>
     </div>
     <div v-if="parseTree" class="block">
       <h3 class="title">Parse tree</h3>
-      <pre id="parseTree">
-        <code>
-          {{ parseTree }}
-        </code>
-      </pre>
+      <pre id="parseTree"><code>{{ parseTree }}</code></pre>
     </div>
   </div>
 </template>
