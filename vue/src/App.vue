@@ -74,6 +74,7 @@ pre {
   padding: 0.5rem 2rem;
   background-color: transparent;
   border-radius: 4px;
+  transition: all 0.3s ease-out;
   @include light {
     color: $accent-color-light;
     border: 1px solid $accent-color-light;
