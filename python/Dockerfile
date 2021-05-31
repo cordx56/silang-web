@@ -17,6 +17,7 @@ RUN pip install pipenv && \
     pipenv install --system
 COPY . .
 COPY --from=builder /usr/local/cargo/bin/silang /silang/
-COPY --from=builder /app/silang-math/target/release/libmath.so /silang/
+COPY --from=builder /app/silang-math/target/release/libmath.so /silang/libraries/
+ENV LD_LIBRARY_PATH=/silang/libraries
 
 CMD gunicorn -c gunicorn.py server:app
