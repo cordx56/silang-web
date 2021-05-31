@@ -1,26 +1,26 @@
-<template lang="pug">
-  #home
-    b-container(fluid).mb-4.text-center
-      b-container
-        h1 SILang
-        h3 Simple Interpreter Language  <small class="text-secondary">beta</small>
-        h5.text-secondary v0.2.0-beta
-    b-container
-      h4 What can I do with SILang?
-      h5 Try SILang coding!
-      p
-        | Implemented functions: 
-        a(href="https://github.com/cordx56/silang/wiki/Implementation-Progress", target="_blank") Implementation Progress
-      RunCode
+<template>
+  <div class="home">
+    <h1>SILang</h1>
+    <h2>Simple Interpreter Language <small class="text-secondary">beta</small></h2>
+    <h3 class="text-secondary">v0.3.0-beta</h3>
+    <RunCode />
+  </div>
 </template>
 
-<script>
-import RunCode from '@/components/RunCode.vue'
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+import RunCode from '@/components/RunCode.vue';
 
-export default {
-  name: 'home',
+@Options({
   components: {
-    RunCode
-  }
-}
+    RunCode,
+  },
+})
+export default class Home extends Vue {}
 </script>
+
+<style lang="scss">
+.home {
+  text-align: center;
+}
+</style>

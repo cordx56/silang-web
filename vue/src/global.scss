@@ -1,0 +1,49 @@
+$size-xl: 1200px;
+$size-lg: 1000px;
+$size-md: 750px;
+$size-sm: 550px;
+
+@mixin size-xl {
+  @media (min-width: $size-xl) {
+    @content;
+  }
+}
+@mixin size-lg {
+  @media (min-width: $size-lg) {
+    @content;
+  }
+}
+@mixin size-md {
+  @media (min-width: $size-md) {
+    @content;
+  }
+}
+@mixin size-sm {
+  @media (min-width: $size-sm) {
+    @content;
+  }
+}
+
+// Color settings
+$background-color-light: #ffffff;
+$background-sub-color-light: #ffffff;
+$background-color-dark: #000000;
+$background-sub-color-dark: #1c1c1e;
+$text-color-light: #2c3e50;
+$text-sub-color-light: #6c757d;
+$text-color-dark: #ffffff;
+$text-sub-color-dark: #808080;
+$accent-color-light: #0a84ff;
+$accent-color-dark: #0a84ff;
+$border-color-light: #ced4da;
+$border-color-dark: #303032;
+@mixin dark {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+@mixin light {
+  @media (prefers-color-scheme: light) {
+    @content;
+  }
+}

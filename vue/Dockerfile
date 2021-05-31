@@ -1,10 +1,10 @@
 FROM node:12 as builder
 WORKDIR /app
 COPY package.json .
-COPY package-lock.json .
-RUN npm install
+COPY yarn.lock .
+RUN yarn install
 COPY . .
-RUN npm run build
+RUN yarn run build
 
 FROM nginx:1.19
 COPY --from=builder /app/dist /usr/share/nginx/html
